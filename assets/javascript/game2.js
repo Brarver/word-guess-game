@@ -3,6 +3,10 @@ var wordDisplay = document.querySelector(".word-display")
 var guessedDisplay = document.querySelector(".letters-guessed-display")
 var remainingDisplay = document.querySelector(".guesses-remaining-display")
 var winsDisplay = document.querySelector(".wins-display")
+var audioElement1 = document.createElement("audio")
+audioElement1.setAttribute("src", "assets/images/falling.wav");
+var audioElement2 = document.createElement("audio")
+audioElement2.setAttribute("src", "assets/images/homer-simpson-woohoo-sound-fx.mp3");
 
 var hangman = {
     words: ['mountain', 'avalanche', 'slope', 'summit', 'cornice'],
@@ -62,7 +66,7 @@ var hangman = {
         setTimeout(function () {
             wordDisplay.innerHTML = ''
             wordDisplay.appendChild(hangman.displayWord(hangman.word, hangman.lettersGuessed))
-        }, 2000)   
+        }, 4000)   
     },
 
     checkWin (arg) {
@@ -74,11 +78,13 @@ var hangman = {
         if (winStatus) {
             wordDisplay.textContent = 'You Won!'
             this.wins++
+            audioElement2.play()
             this.gameReset()  
         }
     
         if (this.guessesRemaining === 0) {
             wordDisplay.textContent = 'You Lose!'
+            audioElement1.play()
             this.gameReset()
         }
     

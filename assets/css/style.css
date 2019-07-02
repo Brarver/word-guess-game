@@ -1,3 +1,59 @@
-p {
-    color: red;
+/* body {
+    width: 100%
+} */
+
+html { 
+    background: url('/assets/images/cliff2.jpeg') no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+  }
+
+h1 {
+    color: white;
+    font-size: 70px;
+    margin-left: 50px;
+    padding-top: 30px;
+}
+
+.word-display {
+    position: relative;
+    color: white;
+    top: 130px;
+    left: 300px;
+    font-size: 40px;
+    letter-spacing: 20px;
+}
+
+/* .letters-guessed-display,
+.guesses-remaining-display,
+.wins-display {
+    position: relative;
+    top: 470px;
+    color: white;
+    left: 700px;
+    font-size: 25px;
+    margin-top: 10px;
+} */
+
+.stats {
+    background-image: radial-gradient(rgb(149, 183, 235), rgb(120, 174, 222), rgb(156, 208, 240));
+    position: relative;
+    top: 410px;
+    color: white;
+    left: 750px;
+    font-size: 25px;
+    width: auto;
+    padding: 15px; 
+    min-width:100px; 
+    display: inline-block;
+    border-radius: 20px;
+    margin: auto;
+}
+
+.letters-guessed-display,
+.guesses-remaining-display,
+.wins-display {
+    margin-top: 10px;
 }
