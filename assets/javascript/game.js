@@ -5,18 +5,11 @@ var wins = 0
 var guessesRemaining = 6
 var word = []
 
-
+/////DOM VARIABLES///////////////
 var wordDisplay = document.querySelector(".word-display")
-wordDisplay.textContent = 'Press any key to get started!'
-
 var guessedDisplay = document.querySelector(".letters-guessed-display")
-guessedDisplay.textContent =  `LettersGuessed: ${lettersGuessed}`
 var remainingDisplay = document.querySelector(".guesses-remaining-display")
-remainingDisplay.textContent = `Guesses Remaining: ${guessesRemaining}`
 var winsDisplay = document.querySelector(".wins-display")
-winsDisplay.textContent = `Wins: ${wins}`
-
-
 
 
 //////////FUNCTIONS//////////////
@@ -25,10 +18,11 @@ var randomSplitWord = function (array) {
     return array[Math.floor(Math.random() * array.length)].split('')
 }
 
-word = randomSplitWord(words)
-console.log(word)
-
-
+var displayStats = function () {
+    guessedDisplay.textContent =  `Letters Guessed: ${lettersGuessed}`
+    remainingDisplay.textContent = `Guesses Remaining: ${guessesRemaining}`
+    winsDisplay.textContent = `Wins: ${wins}`
+}
 
 var displayWord = function (word, letters) {
     var content = []
@@ -62,55 +56,53 @@ var checkLetter = function (guess) {
     }
 }
 
+var gameReset = function () {
+    word = randomSplitWord(words)
+    lettersGuessed = []
+    guessesRemaining = 6
+    displayStats()
+    setTimeout(function () {
+        wordDisplay.innerHTML = ''
+        wordDisplay.appendChild(displayWord(word, lettersGuessed))
+    }, 2000)   
+}
+
 var checkWin = function (arg) {
     
     var winStatus = arg.every(letter => {
          return lettersGuessed.includes(letter)
     })
 
-
     if (winStatus) {
-        wordDisplay.textContent = 'You Win!'
-        word = randomSplitWord(words)
-        lettersGuessed = []
+        wordDisplay.textContent = 'You Won!'
         wins++
-        guessesRemaining = 6
-        winsDisplay.textContent = `Wins: ${wins}`
-        guessedDisplay.textContent =  `LettersGuessed: ${lettersGuessed}`
-        remainingDisplay.textContent = `Guesses Remaining: ${guessesRemaining}`
-        setTimeout(function () {
-            wordDisplay.innerHTML = ''
-            wordDisplay.appendChild(displayWord(word, lettersGuessed))
-        }, 2000)   
+        gameReset()  
     }
 
     if (guessesRemaining === 0) {
         wordDisplay.textContent = 'You Lose!'
-        word = randomSplitWord(words)
-        lettersGuessed = []
-        guessesRemaining = 6
-        guessedDisplay.textContent =  `LettersGuessed: ${lettersGuessed}`
-        remainingDisplay.textContent = `Guesses Remaining: ${guessesRemaining}`
-        setTimeout(function () {
-            wordDisplay.innerHTML = ''
-            wordDisplay.appendChild(displayWord(word, lettersGuessed))
-        }, 2000)
+        wins--
+        gameReset()
     }
 
 }
 
-
-
-
 //////EVENTS/CALLS///////////////
+
+word = randomSplitWord(words)
+console.log(word)
+
+wordDisplay.textContent = 'Press any key to get started!'
+
+displayStats()
 
 document.addEventListener('keypress', function (e) {
     wordDisplay.innerHTML = ''
     checkLetter(e.key)
     wordDisplay.appendChild(displayWord(word, lettersGuessed))
-    checkWin(word, lettersGuessed) 
+    checkWin(word) 
 })
-//yep
+
 
 
 
