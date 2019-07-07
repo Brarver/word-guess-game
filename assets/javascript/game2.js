@@ -93,7 +93,7 @@ var hangman = {
 
 //////EVENTS/CALLS///////////////
 
-// alert('Devin, I have logged all the answers to the console to make it easier for you to check functionality')
+alert('I have logged all the answers to the console to make it easier for you to check functionality')
 
 hangman.randomSplitWord(hangman.words)
 
